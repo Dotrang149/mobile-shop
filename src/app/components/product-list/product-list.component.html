@@ -13,7 +13,7 @@
   </div>
 </div> -->
 
-<div *ngIf="products.length; else noProducts">
+<!--  <div *ngIf="products.length; else noProducts">
     <ul>
       <li *ngFor="let product of products">
         {{ product.name }} - {{ product.price | currency }}
@@ -22,5 +22,30 @@
   </div>
   <ng-template #noProducts>
     <p>No products available.</p>
-  </ng-template>
+  </ng-template> -->
   
+
+  <div class="container">
+    <h2>Product List</h2>
+  
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.price }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
