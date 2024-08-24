@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* Cho phép main mở rộng để lấp đầy không gian trống */
+}
+
+app-footer {
+    margin-top: auto;
+}
+
+.bg-custom {
+    background-color: #013243;
+}
+
+.text-white {
+    color: white;
+}
+
+.bg-custom-select {
+    background-color: #013243;
+    border: 1px solid white;
+}
+
+.bg-custom-select option {
+    background-color: white;
+    color: black;
+}
+
+.btn-primary {
+    background-color: #269dbb;
+    border: none;
+  }
