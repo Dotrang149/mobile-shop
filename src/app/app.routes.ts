@@ -4,9 +4,10 @@ import { ProductComponent } from './components/product/product.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
 
 export const routes: Routes = [
-    {path:'', component:HomeComponent},
+    {path:'', component:UserManagementComponent},
     {path:'product', component:ProductComponent},
     {path: 'login', component: LoginComponent },
     {path: 'register', component: RegisterComponent},
