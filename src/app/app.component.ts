@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
     RouterOutlet, 
     NavbarComponent, 
     FooterComponent,
-    ProductListComponent
+    ProductListComponent,
+    FontAwesomeModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

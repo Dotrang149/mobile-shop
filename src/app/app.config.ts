@@ -13,10 +13,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient()
   ],
-  // declarations: [
-  //   NavbarComponent,
-  //   HomeComponent,
-  //   ProductComponent,
-    
-  // ]
+
 };

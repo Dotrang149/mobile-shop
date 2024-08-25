@@ -7,7 +7,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, ProductListComponent],
+  imports: [
+    CommonModule, 
+    NavbarComponent, 
+    FooterComponent, 
+    ProductListComponent,
+    
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

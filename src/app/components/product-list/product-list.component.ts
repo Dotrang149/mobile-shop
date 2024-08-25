@@ -2,18 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService, Product } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { PaginatedResult } from '../../page/PaginatedResult';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ProductDetailComponent, RouterLink],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  selectedProduct: Product | undefined;
+
+  onSelectProduct(product: Product): void {
+    this.router.navigate(['/product-detail', product.id]);
+  }
+  
+
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllProducts();
