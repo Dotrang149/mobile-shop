@@ -11,6 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserManagementComponent } from "./admin/user-management/user-management.component";
 import { HomeComponent } from "./components/home/home.component";
 import { ProductManagementComponent } from "./admin/product-management/product-management.component";
+import { BrandManagementComponent } from "./admin/brand-management/brand-management.component";
+import { PromotionManagementComponent } from "./admin/promotion-management/promotion-management.component";
 
 @Component({
   selector: 'app-root',
@@ -24,8 +26,11 @@ import { ProductManagementComponent } from "./admin/product-management/product-m
     FontAwesomeModule,
     UserManagementComponent,
     HomeComponent,
-    ProductManagementComponent
-  ],
+    ProductManagementComponent,
+    ProductManagementComponent,
+    BrandManagementComponent,
+    PromotionManagementComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

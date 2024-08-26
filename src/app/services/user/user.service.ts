@@ -32,8 +32,8 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/Get-by-id/${userId}`);
   }
 
-  createUser(userName: string, email: string, password: string, role : string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl1}/CreateUser`,{ userName, email, password ,role });
+  createUser(userName: string, email: string, password: string,phoneNumber: number, role : string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl1}/CreateUser`,{ userName, email, password,phoneNumber ,role });
   }
 
   assignRole(userId: string, roleName: string): Observable<any> {
