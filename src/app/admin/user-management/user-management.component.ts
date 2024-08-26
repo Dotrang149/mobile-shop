@@ -1,57 +1,151 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { User, UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.css'
 })
 export class UserManagementComponent {
-  users = [
-    // Danh sách người dùng sẽ được lấy từ server hoặc service
-    { id: 1, name: 'Nguyen Van A', email: 'a@example.com', role: 'Admin' },
-    { id: 2, name: 'Tran Van B', email: 'b@example.com', role: 'User' },
-    // Thêm các người dùng khác tại đây
-  ];
+  users: User[] = [];
+  currentUser!: User;
+  newUser: { userName: string, email: string, password: string, role : string } = { userName: '', email: '', password: '', role: '' };
+  newRole: { roleName: string, roleDescription: string } = { roleName: '', roleDescription: '' };
 
-  currentPage = 1;
-  itemsPerPage = 10;
-  totalUsers = this.users.length;
-  totalPages = Math.ceil(this.totalUsers / this.itemsPerPage);
+  constructor(private userService: UserService) { }
 
-  paginationArray = Array.from({length: this.totalPages}, (v, i) => i + 1);
-
-  constructor() { }
-
-  ngOnInit(): void { }
-
-  onAddUser(): void {
-    // Logic thêm người dùng
+  ngOnInit() {
+    this.loadUsers();
   }
 
-  onEditUser(): void {
-    // Logic sửa thông tin người dùng
+  loadUsers(): void {
+    console.log('Fetching all users...');
+    this.userService.getAllUsers().subscribe(
+      (data: any) => {
+        console.log('Raw data fetched:', data);
+        if (data && data.$values) {
+          this.users = data.$values; // Truy cập vào mảng $values chứa người dùng
+          console.log('Users fetched:', this.users);
+        } else {
+          console.error('Invalid data format:', data);
+        }
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
 
-  onDeleteUser(userId: number): void {
-    // Logic xóa người dùng
-    this.users = this.users.filter(user => user.id !== userId);
-    this.totalUsers = this.users.length;
-    this.totalPages = Math.ceil(this.totalUsers / this.itemsPerPage);
-    this.paginationArray = Array.from({length: this.totalPages}, (v, i) => i + 1);
+  getUserById(userId: string) : void {
+    this.userService.getUserById(userId).subscribe(
+      (user) => {
+        this.currentUser = user;
+      },
+      (error) => {
+        console.error('Lỗi khi lấy thông tin người dùng:', error);
+      }
+    );
   }
 
-  changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
+  createUser(userName:string, email:string,password:string, role : string) : void {
+    console.log(userName,email,password,role);
+
+    if (!this.newUser.userName || !this.newUser.email || !this.newUser.password) {
+      console.error('Dữ liệu người dùng chưa đầy đủ');
+      return;
     }
+
+    this.userService.createUser(userName,email,password,role).subscribe(
+      () => {
+        console.log('Tạo người dùng thành công');
+        this.loadUsers(); // Cập nhật danh sách người dùng nếu cần
+      },
+      (error) => {
+        console.error('Lỗi khi tạo người dùng:', error);
+        // Thêm log để xem chi tiết lỗi
+        if (error.error && error.error.errors) {
+          console.error('Chi tiết lỗi:', error.error.errors);
+      }
+    }
+    );
   }
 
-  get paginatedUsers() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    return this.users.slice(start, end);
+  assignRole(userId: string, roleName: string) {
+    this.userService.assignRole(userId, roleName).subscribe(
+      () => {
+        console.log('Gán vai trò thành công');
+      },
+      (error) => {
+        console.error('Lỗi khi gán vai trò:', error);
+      }
+    );
+  }
+
+  removeRole(userId: string, roleName: string) {
+    this.userService.removeRole(userId, roleName).subscribe(
+      () => {
+        console.log('Xóa vai trò thành công');
+      },
+      (error) => {
+        console.error('Lỗi khi xóa vai trò:', error);
+      }
+    );
+  }
+
+  createRole() {
+    console.log(this.newRole);
+    
+    this.userService.createRole(this.newRole.roleName, this.newRole.roleDescription).subscribe(
+      () => {
+        console.log('Tạo vai trò thành công');
+      },
+      (error) => {
+        console.error('Lỗi khi tạo vai trò:', error);
+      }
+    );
+  }
+
+  deleteRole(roleName: string) : void {
+    console.log(roleName);
+    console.log(this.newRole.roleName);
+    
+    
+    this.userService.deleteRole(roleName).subscribe(
+      () => {
+        console.log('Xóa vai trò thành công');
+      },
+      (error) => {
+        console.error('Lỗi khi xóa vai trò:', error);
+      }
+    );
+  }
+
+  deleteUser(userId: string) {
+    this.userService.deleteUser(userId).subscribe(
+      () => {
+        console.log('Xóa người dùng thành công');
+        this.loadUsers();
+      },
+      (error) => {
+        console.error('Lỗi khi xóa người dùng:', error);
+      }
+    );
+  }
+
+  updateUser() {
+    console.log(this.currentUser);
+    this.userService.updateUser(this.currentUser).subscribe(
+      () => {
+        console.log('Cập nhật người dùng thành công');
+        this.loadUsers();
+      },
+      (error) => {
+        console.error('Lỗi khi cập nhật người dùng:', error);
+      }
+    );
   }
 }

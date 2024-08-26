@@ -8,17 +8,23 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserManagementComponent } from "./admin/user-management/user-management.component";
+import { HomeComponent } from "./components/home/home.component";
+import { ProductManagementComponent } from "./admin/product-management/product-management.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
-    NavbarComponent, 
+    CommonModule,
+    RouterOutlet,
+    NavbarComponent,
     FooterComponent,
     ProductListComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    UserManagementComponent,
+    HomeComponent,
+    ProductManagementComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

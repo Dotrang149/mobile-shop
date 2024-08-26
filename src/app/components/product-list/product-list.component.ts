@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService, Product } from '../../services/product.service';
+import { ProductService, Product } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { PaginatedResult } from '../../page/PaginatedResult';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
 
   getAllProducts(): void {
     console.log('Fetching all products...');
-    this.productService.getProducts().subscribe(
+    this.productService.getAllProducts().subscribe(
       (data: any) => {
         console.log('Raw data fetched:', data);
         if (data && data.$values) {
