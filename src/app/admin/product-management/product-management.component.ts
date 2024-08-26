@@ -104,4 +104,15 @@ export class ProductManagementComponent {
     )
 
   }
+
+  editProduct(productId: string): void {
+    this.productService.getProductById(productId).subscribe(
+      (product) => {
+        this.currentProduct = product;
+      },
+      (error) => {
+        console.error('Error fetching product:', error);
+      }
+    );
+  }
 }

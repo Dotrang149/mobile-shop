@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { FooterComponent } from "../../components/footer/footer.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, NavbarComponent, FooterComponent, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -16,8 +17,8 @@ export class CartComponent {
     {
       product: {
         name: "Iphone 15",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrUgZqOnXwCjnsKe-BS59j2ib2ApYjs9-SMQ&s",
-        price: 100000
+        image: "https://sieuthismartphone.com/data/product/small/small_amt1608534646.jpg",
+        price: 100000000
       },
       quantity: 2
     },
@@ -25,7 +26,7 @@ export class CartComponent {
       product: {
         name: "Iphone 15 promax",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrUgZqOnXwCjnsKe-BS59j2ib2ApYjs9-SMQ&s",
-        price: 200000
+        price: 200000000
       },
       quantity: 1
     }
