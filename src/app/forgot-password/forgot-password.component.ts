@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService, ForgotPassword } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,17 +20,23 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.fb.group({
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]]
     });
   }
 
   onSubmit(): void {
     if (this.forgotPasswordForm.valid) {
-      const email = this.forgotPasswordForm.value.email;
-      this.auth.forgotPassword(email).subscribe({
-        next: (res) => {
-          alert('Password reset link sent to your email!');
-          this.router.navigate(['/login']);
+      const forgotPasswordData : ForgotPassword = this.forgotPasswordForm.value as ForgotPassword;
+      console.log("Form submitted", forgotPasswordData)
+      this.auth.verifyUser(forgotPasswordData).subscribe({
+        next: () => {
+          this.router.navigate(['/reset-password'], {
+            queryParams: {
+              username: forgotPasswordData.username,
+              email: forgotPasswordData.email
+            }
+          });
         },
         error: (err) => {
           alert('Error: ' + err?.error.message);
@@ -38,8 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
       });
     } else {
       this.forgotPasswordForm.markAllAsTouched();
-      alert('Please enter a valid email address.');
+      alert('Please enter valid details.');
     }
   }
 }
-

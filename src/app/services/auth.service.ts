@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -13,6 +13,18 @@ export interface RegisterUser {
 export interface LoginUser {
   userName: string;
   password: string;
+}
+
+export interface ForgotPassword {
+  username: string;
+  email: string;
+}
+
+export interface ResetPassword {
+  username: string;
+  email: string;
+  newPassword: string;
+  confirmPassword: string;
 }
 
 
@@ -32,8 +44,17 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}login`, loginObj)
   }
 
-  forgotPassword(email: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/forgot-password`, { email });
+  resetPassword(data: ResetPassword): Observable<ResetPassword> {
+    return this.http.put<any>(`${this.baseUrl}update-password`, data, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
+
+  verifyUser(data: ForgotPassword): Observable<ForgotPassword> {
+    let params = new HttpParams().set('username',data.username).set('email', data.email);
+    return this.http.get<any>(`${this.baseUrl}verify-user`, {params});
+  }
+
+
 
 }

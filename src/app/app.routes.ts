@@ -9,6 +9,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { PromotionComponent } from './promotion/promotion.component';
 import { CartComponent } from './use/cart/cart.component';
 import { PayComponent } from './pay/pay.component';
+import { ResetPasswordComponent } from  './reset-password/reset-password.component';
 
 export const routes: Routes = [
     {path:'', component:HomeComponent},
@@ -20,5 +21,8 @@ export const routes: Routes = [
     {path: 'promotion', component: PromotionComponent},
     {path: 'product-detail/:id', component: ProductDetailComponent },
     {path: 'cart', component:CartComponent},
-    {path: 'pay', component:PayComponent}
+    {path: 'pay', component:PayComponent},
+    {path: 'reset-password', component: ResetPasswordComponent},
+    
+  
 ];
