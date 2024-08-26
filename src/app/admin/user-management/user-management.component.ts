@@ -7,14 +7,14 @@ import { User, UserService } from '../../services/user/user.service';
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.css'
 })
 export class UserManagementComponent {
   users: User[] = [];
   currentUser!: User;
-  newUser: { userName: string, email: string, password: string, role : string } = { userName: '', email: '', password: '', role: '' };
+  newUser: { userName: string, email: string, password: string, phoneNumber: number, role: string } = { userName: '', email: '', password: '', phoneNumber: 0, role: '' };
   newRole: { roleName: string, roleDescription: string } = { roleName: '', roleDescription: '' };
 
   constructor(private userService: UserService) { }
@@ -41,7 +41,7 @@ export class UserManagementComponent {
     );
   }
 
-  getUserById(userId: string) : void {
+  getUserById(userId: string): void {
     this.userService.getUserById(userId).subscribe(
       (user) => {
         this.currentUser = user;
@@ -52,15 +52,15 @@ export class UserManagementComponent {
     );
   }
 
-  createUser(userName:string, email:string,password:string, role : string) : void {
-    console.log(userName,email,password,role);
+  createUser(userName: string, email: string, password: string, phoneNumber: number, role: string): void {
+    console.log(userName, email, password, role);
 
     if (!this.newUser.userName || !this.newUser.email || !this.newUser.password) {
       console.error('Dữ liệu người dùng chưa đầy đủ');
       return;
     }
 
-    this.userService.createUser(userName,email,password,role).subscribe(
+    this.userService.createUser(userName, email, password, phoneNumber, role).subscribe(
       () => {
         console.log('Tạo người dùng thành công');
         this.loadUsers(); // Cập nhật danh sách người dùng nếu cần
@@ -70,8 +70,8 @@ export class UserManagementComponent {
         // Thêm log để xem chi tiết lỗi
         if (error.error && error.error.errors) {
           console.error('Chi tiết lỗi:', error.error.errors);
+        }
       }
-    }
     );
   }
 
@@ -99,7 +99,7 @@ export class UserManagementComponent {
 
   createRole() {
     console.log(this.newRole);
-    
+
     this.userService.createRole(this.newRole.roleName, this.newRole.roleDescription).subscribe(
       () => {
         console.log('Tạo vai trò thành công');
@@ -110,11 +110,11 @@ export class UserManagementComponent {
     );
   }
 
-  deleteRole(roleName: string) : void {
+  deleteRole(roleName: string): void {
     console.log(roleName);
     console.log(this.newRole.roleName);
-    
-    
+
+
     this.userService.deleteRole(roleName).subscribe(
       () => {
         console.log('Xóa vai trò thành công');

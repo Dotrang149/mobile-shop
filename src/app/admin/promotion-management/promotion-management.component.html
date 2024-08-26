@@ -1,0 +1,81 @@
+<div class="container">
+    <h1>Quản lý khuyến mãi</h1>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Danh sách khuyến mãi</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên</th>
+              <th>Mô tả</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let promotion of promotions" (click)="getPromtionById(promotion.id)">
+              <td>{{ promotion.id }}</td>
+              <td><a href="javascript:void(0)">{{ promotion.name }}</a></td>
+              <td>{{ promotion.description }}</td>
+              <td>{{ promotion.dateStart | date }}</td>
+              <td>{{ promotion.dateEnd | date }}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteBrand(promotion.id)">Xóa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="col-md-6" *ngIf="currentPromotion">
+        <h2>Chi tiết khuyến mãi</h2>
+        <form>
+          <div class="form-group">
+            <label for="promotionName">Tên khuyến mãi:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="currentPromotion.name" name="promotionName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="currentPromotion.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dateStart">Ngày bắt đầu:</label>
+            <input type="date" class="form-control" id="dateStart" [(ngModel)]="currentPromotion.dateStart" name="dateStart">
+          </div>
+          <div class="form-group">
+            <label for="dateEnd">Ngày kết thúc:</label>
+            <input type="date" class="form-control" id="dateEnd" [(ngModel)]="currentPromotion.dateEnd" name="dateEnd">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="updateBrand()">Cập nhật</button>
+        </form>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Tạo khuyến mãi mới</h2>
+        <form>
+          <div class="form-group">
+            <label for="promotionName">Tên khuyến mãi:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="newPromotion.name" name="promotionName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="newPromotion.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dateStart">Ngày bắt đầu:</label>
+            <input type="date" class="form-control" id="dateStart" [(ngModel)]="newPromotion.dateStart" name="dateStart">
+          </div>
+          <div class="form-group">
+            <label for="dateEnd">Ngày kết thúc:</label>
+            <input type="date" class="form-control" id="dateEnd" [(ngModel)]="newPromotion.dateEnd" name="dateEnd">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="createBrand(newPromotion.name, newPromotion.description, newPromotion.dateStart, newPromotion.dateEnd)">Tạo khuyến mãi</button>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -10,6 +10,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { UserManagementComponent } from "./admin/user-management/user-management.component";
 import { HomeComponent } from "./components/home/home.component";
 import { ProductManagementComponent } from "./admin/product-management/product-management.component";
+import { BrandManagementComponent } from "./admin/brand-management/brand-management.component";
+import { PromotionManagementComponent } from "./admin/promotion-management/promotion-management.component";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,9 @@ import { ProductManagementComponent } from "./admin/product-management/product-m
     ProductListComponent,
     UserManagementComponent,
     HomeComponent,
-    ProductManagementComponent
+    ProductManagementComponent,
+    BrandManagementComponent,
+    PromotionManagementComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

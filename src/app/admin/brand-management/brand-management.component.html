@@ -1,0 +1,63 @@
+<div class="container">
+    <h1>Quản lý thương hiệu</h1>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Danh sách thương hiệu</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên thương hiệu</th>
+              <th>Mô tả</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let brand of brands" (click)="getBrandById(brand.id)">
+              <td>{{ brand.id }}</td>
+              <td><a href="javascript:void(0)">{{ brand.name }}</a></td>
+              <td>{{ brand.description }}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteBrand(brand.id)">Xóa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="col-md-6" *ngIf="currentBrand">
+        <h2>Thông tin thương hiệu</h2>
+        <form>
+          <div class="form-group">
+            <label for="brandName">Tên thương hiệu:</label>
+            <input type="text" class="form-control" id="brandName" [(ngModel)]="currentBrand.name" name="brandName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="currentBrand.description" name="description"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="updateBrand()">Cập nhật</button>
+        </form>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Tạo thương hiệu mới</h2>
+        <form>
+          <div class="form-group">
+            <label for="brandName">Tên thương hiệu:</label>
+            <input type="text" class="form-control" id="brandName" [(ngModel)]="newBrand.name" name="brandName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="newBrand.description" name="description"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="createBrand(newBrand.name, newBrand.description)">
+            Tạo thương hiệu
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
