@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface RegisterUser {
   userName: string;
@@ -32,7 +32,7 @@ export interface ResetPassword {
   providedIn: 'root'
 })
 export class AuthService {
-
+  private userRole: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private baseUrl:string = "https://localhost:7189/api/User/"
   constructor(private http : HttpClient) { }
 
@@ -55,6 +55,18 @@ export class AuthService {
     return this.http.get<any>(`${this.baseUrl}verify-user`, {params});
   }
 
+  private loggedIn = false;
 
+  setLoggedIn(value: boolean) {
+    this.loggedIn = value;
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+  
+  getRole() {
+    return this.userRole.asObservable();
+  }
 
 }

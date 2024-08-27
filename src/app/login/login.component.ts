@@ -1,14 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { AuthService, LoginUser } from '../services/auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, HttpClientModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    ReactiveFormsModule, 
+    HttpClientModule,
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -16,7 +22,7 @@ export class LoginComponent implements OnInit{
   showPassword = false;
 
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -42,6 +48,8 @@ export class LoginComponent implements OnInit{
           } else {
             alert("Login successful, but no message was returned from the server.");
           }
+          this.auth.setLoggedIn(true);  // Lưu trạng thái đăng nhập
+          this.router.navigate(['/home']);  // Chuyển hướng sau khi đăng nhập thành công
         },
         error:(err)=>{
           alert(err?.error.message)
