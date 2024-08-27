@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User, UserService } from '../../services/user/user.service';
 import { PaginateResult } from '../../../paginate-result';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent],
   templateUrl: './user-management.component.html',
   styleUrl: './user-management.component.css'
 })

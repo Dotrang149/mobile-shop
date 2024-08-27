@@ -3,13 +3,15 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Product, ProductService } from '../../services/product/product.service';
 import { PaginateResult } from '../../../paginate-result';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 
 
 @Component({
   selector: 'app-product-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent],
   templateUrl: './product-management.component.html',
   styleUrl: './product-management.component.css'
 })

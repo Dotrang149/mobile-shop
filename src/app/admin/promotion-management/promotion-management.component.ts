@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Promotion, PromotionService } from '../../services/promotion/promotion.service';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-promotion-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent],
   templateUrl: './promotion-management.component.html',
   styleUrl: './promotion-management.component.css'
 })

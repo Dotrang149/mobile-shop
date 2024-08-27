@@ -11,6 +11,8 @@ import { CartComponent } from './use/cart/cart.component';
 import { PayComponent } from './pay/pay.component';
 import { ResetPasswordComponent } from  './reset-password/reset-password.component';
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
+import { BrandManagementComponent } from './admin/brand-management/brand-management.component';
+import { PromotionManagementComponent } from './admin/promotion-management/promotion-management.component';
 
 export const routes: Routes = [
     {path:'', component:HomeComponent},
@@ -24,7 +26,10 @@ export const routes: Routes = [
     {path: 'cart', component:CartComponent},
     {path: 'pay', component:PayComponent},
     {path: 'reset-password', component: ResetPasswordComponent},
-    {path : 'product-management' , component : ProductManagementComponent}
+    {path: 'product-management' , component : ProductManagementComponent},
+    {path: 'user-management', component: UserManagementComponent},
+    {path: 'brand-management', component: BrandManagementComponent},
+    {path: 'promotion-management', component: PromotionManagementComponent}
     
   
 ];

@@ -18,29 +18,55 @@
       </li>
     </ul>
     <ul class="navbar-nav d-flex">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link text-light" routerLink='/cart'> 
           <fa-icon [icon]="faShoppingCart"></fa-icon> 
         </a> 
-      </li>
+      </li> -->
       <li class="nav-item" *ngIf="!authService.isLoggedIn()">
         <button class="btn btn-primary ms-2" routerLink='/login'>Login</button>
       </li>
       <li class="nav-item" *ngIf="!authService.isLoggedIn()">
         <button class="btn btn-primary ms-2" routerLink="/register">Register</button>
       </li>
-      <li class="nav-item" *ngIf="authService.isLoggedIn()">
+      <!-- <li class="nav-item" *ngIf="authService.isLoggedIn()">
         <button class="btn btn-primary ms-2" (click)=authService.logout();setFalse()>Logout</button>
-      </li>
+      </li> -->
 
-      <button *ngIf="isAdmin" class="admin-button">
+      <!-- <button *ngIf="isAdmin" class="admin-button">
         Admin Dashboard
-    </button>
+    </button> -->
     
     <!-- Nút cho Customer -->
-    <button *ngIf="isCustomer" class="customer-button">
+    <!-- <button *ngIf="isCustomer" class="customer-button">
         Customer Dashboard
-    </button>
+    </button> -->
+
+    <li class="nav-item dropdown"  *ngIf="isCustomer">
+      <a  class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" (click)="toggleDropdown()" aria-expanded="false">
+        <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" routerLink="/my-account">Tài khoản của tôi</a></li>
+        <li><a class="dropdown-item" routerLink="/cart">Giỏ hàng</a></li>
+        <li><a class="dropdown-item" (click)="authService.logout(); setFalse()">Đăng xuất</a></li>
+      </ul>
+    </li>
+
+    <li class="nav-item dropdown" *ngIf="isAdmin">
+      <a  class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" (click)="toggleDropdown()" aria-expanded="false">
+        <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" routerLink="/my-account">Tài khoản của tôi</a></li>
+        <li><a class="dropdown-item" routerLink="/user-management">Quản lý người dùng</a></li>
+        <li><a class="dropdown-item" routerLink="/product-management">Quản lý sản phẩm</a></li>
+        <li><a class="dropdown-item" routerLink="/brand-management">Quản lý thương hiệu</a></li>
+        <li><a class="dropdown-item" routerLink="/promotion-management">Quản lý quảng cáo</a></li>
+        <li><a class="dropdown-item" (click)="authService.logout(); setFalse()">Đăng xuất</a></li>
+      </ul>
+    </li>
+    
     </ul>
   </div>
 

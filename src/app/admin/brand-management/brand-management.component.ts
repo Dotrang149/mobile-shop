@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Brand, BrandService } from '../../services/brand/brand.service';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { FooterComponent } from "../../components/footer/footer.component";
 
 @Component({
   selector: 'app-brand-management',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent],
   templateUrl: './brand-management.component.html',
   styleUrl: './brand-management.component.css'
 })
