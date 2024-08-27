@@ -3,7 +3,12 @@
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-  }
+}
+h1, h2 {
+    text-align: center; /* Căn giữa tiêu đề */
+    color: #343a40; /* Màu chữ tối */
+    margin-bottom: 20px;
+}
 
   .form-group {
     margin-bottom: 15px; /* Khoảng cách giữa các trường nhập liệu */

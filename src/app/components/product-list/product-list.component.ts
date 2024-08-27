@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ProductService, Product } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { PaginatedResult } from '../../page/PaginatedResult';
@@ -13,8 +13,14 @@ import { Router } from '@angular/router';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
-  products: Product[] = [];
+export class ProductListComponent  implements OnInit{
+  @Input() products: any[] = []; // Nhận danh sách sản phẩm từ component home
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['products']) {
+      console.log('Products data received:', this.products);
+    }
+  }
 
   selectedProduct: Product | undefined;
 
@@ -47,3 +53,5 @@ export class ProductListComponent implements OnInit {
     );
   }
 }
+
+

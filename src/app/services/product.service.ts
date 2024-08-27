@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../page/PaginatedResult';
 
@@ -10,6 +10,7 @@ export interface Product {
   description : string;
   image: string;
   price: number;
+  branch: string
 
   // Add other product fields as necessary
 }
@@ -39,6 +40,20 @@ export class ProductService {
 
   deleteProduct(id: string): Observable<void> {
     return this.http.delete<void>(`${this.APIUrl}/delete-product/${id}`);
+  }
+
+  filterProducts(maxPrice?: number, brand?: string): Observable<Product[]> {
+    let params = new HttpParams();
+
+    if (maxPrice !== undefined && maxPrice !== null) {
+      params = params.set('maxPrice', maxPrice.toString());
+    }
+
+    if (brand) {
+      params = params.set('brand', brand);
+    }
+
+    return this.http.get<Product[]>(`${this.APIUrl}/filter-products`, { params });
   }
 
   getProductsByPaging(

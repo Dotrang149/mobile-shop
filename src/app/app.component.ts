@@ -16,6 +16,8 @@ import { PromotionManagementComponent } from "./admin/promotion-management/promo
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { PayComponent } from "./pay/pay.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -30,12 +32,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     UserManagementComponent,
     HomeComponent,
     ProductManagementComponent,
-    ProductManagementComponent,
     BrandManagementComponent,
     PromotionManagementComponent,
     ReactiveFormsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    PayComponent,
+    FormsModule,
+    ProductListComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

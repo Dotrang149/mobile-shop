@@ -6,13 +6,15 @@
 main {
     flex: 1; /* Cho phép main mở rộng để lấp đầy không gian trống */
 }
-
+.cart{
+    background-color: #778899;
+}
 app-footer {
     margin-top: auto;
 }
 
 .bg-custom {
-    background-color: #013243;
+    background-color: #3f6184;
 }
 
 .text-white {
@@ -20,7 +22,7 @@ app-footer {
 }
 
 .bg-custom-select {
-    background-color: #013243;
+    background-color: #3f6184;
     border: 1px solid white;
 }
 
@@ -30,6 +32,23 @@ app-footer {
 }
 
 .btn-primary {
-    background-color: #269dbb;
+    background-color: #5faeb6;
     border: none;
   }
+
+.custom-padding {
+    padding-left: 400px;
+    padding-right: 200px;
+}
+
+.custom-heading {
+    font-size: 3rem; /* Tăng cỡ chữ cho tiêu đề */
+    font-weight: bold; /* Làm đậm tiêu đề */
+}
+
+.custom-image {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước container */
+    height: auto;
+    width: 70%; /* Tăng kích thước ảnh lên 80% so với container */
+}
+

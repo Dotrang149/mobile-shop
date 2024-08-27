@@ -1,5 +1,5 @@
 .footer {
-    background-color: #013243; /* Màu nền phù hợp với navbar */
+    background-color: #3f6184; /* Màu nền phù hợp với navbar */
     color: #ffffff; /* Màu chữ trắng */
     padding: 20px 0;
 }
@@ -15,7 +15,7 @@
 }
 
 .footer a {
-    color: #00bfff; 
+    color: #5faeb6; 
     text-decoration: none;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .footer .btn-primary {
-    background-color: #00bfff;
+    background-color: #5faeb6;
     border: none;
     margin-right: 5px;
 }
