@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Product, ProductService } from '../../services/product/product.service';
+import { PaginateResult } from '../../../paginate-result';
 
 
 
@@ -17,10 +18,33 @@ export class ProductManagementComponent {
   currentProduct!: Product;
   newProduct: { name: string, description: string, price: number, image: string, brandName: string, promotionName: string } = { name: '', description: '', price: 0, image: '', brandName: '', promotionName: '' }
 
+
+  paginateResult: PaginateResult<Product> = {
+    items: [],
+    totalItems: 0,
+    totalPages: 0,
+    currentPage: 0
+  };
+  filter = '';
+  sortBy = '';
+  pageIndex = 1;
+  pageSize = 20;
+  totalPages!: number;
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    this.getAllProducts();
+    this.loadProducts();
+  }
+
+  loadProducts() : void{
+    this.productService
+      .getProductByPaging(this.filter, this.sortBy, this.pageIndex, this.pageSize)
+      .subscribe((response) => {
+        this.paginateResult = response;
+        this.products = response.items;
+        console.log(this.products);
+        
+      });
   }
 
   getAllProducts(): void {

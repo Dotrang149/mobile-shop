@@ -1,5 +1,6 @@
 <div class="container ">
   <div class="cart-container">
+<!-- <div class="container">
   <h1>Quản lý người dùng</h1>
 
   <div class="row">
@@ -59,6 +60,114 @@
 
   <div class="row">
     <div class="col-md-6">
+      c
+    </div>
+
+    <div class="col-md-6">
+      <h2>Quản lý vai trò</h2>
+      <form>
+       
+        <div class="form-group">
+          <label for="roleName">Tên vai trò:</label>
+          <input type="text" class="form-control" id="roleName" [(ngModel)]="newRole.roleName" name="roleName">
+        </div>
+        <div class="form-group">
+          <label for="roleDescription">Mô tả vai trò:</label>
+          <textarea class="form-control" id="roleDescription" [(ngModel)]="newRole.roleDescription" name="roleDescription"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="createRole()">Tạo vai trò</button>
+        <button type="button" class="btn btn-danger" (click)="deleteRole(newRole.roleName)">Xóa vai trò</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+ -->
+
+
+ <div class="container">
+  <h1>Quản lý người dùng</h1>
+
+  <div class="search-filter">
+    <input type="text" [(ngModel)]="filter" (input)="loadUsers()" placeholder="Search by name" />
+    <select [(ngModel)]="sortBy" (change)="loadUsers()">
+      <option value="name">Name</option>
+      <option value="id">ID</option>
+    </select>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.id }}</td>
+        <td><a href="javascript:void(0)" (click)="getUserById(user.id)">{{ user.userName }}</a></td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteUser(user.id)">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="pageIndex = pageIndex - 1; loadUsers()" [disabled]="pageIndex <= 1">
+      Previous
+    </button>
+    <span>Page {{ pageIndex }}</span>
+    <button
+      (click)="pageIndex = pageIndex + 1; loadUsers()"
+      [disabled]="paginateResult.totalPages <= pageIndex"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+  
+
+  <div class="row">
+    <div class="col-md-6" *ngIf="currentUser">
+      <!-- Thông tin người dùng -->
+       <h2>Thông tin người dùng</h2>
+      <form>
+        <div class="form-group">
+          <label for="userName">Tên người dùng:</label>
+          <input type="text" class="form-control" id="userName" [(ngModel)]="currentUser.userName" name="userName">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="currentUser.email" name="email" >
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="currentUser.password" name="password" >
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">PhoneNumber:</label>
+          <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="currentUser.phonenumber" name="phoneNumber" >
+        </div>
+        <div class="form-group">
+          <label for="role">role</label>
+          <input type="text" class="form-control" id="role" [(ngModel)]="currentUser.role" name="role" >
+        </div>
+        <button type="button" class="btn btn-primary" (click)="updateUser()">Cập nhật</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <!-- Tạo người dùng mới -->
       <h2>Tạo người dùng mới</h2>
       <form>
         <div class="form-group">
@@ -93,9 +202,10 @@
     </div>
 
     <div class="col-md-6">
-      <h2>Quản lý vai trò</h2>
+      <!-- Quản lý vai trò -->
+
       <form>
-        <!-- Giữ nguyên các trường cho quản lý vai trò -->
+       
         <div class="form-group">
           <label for="roleName">Tên vai trò:</label>
           <input type="text" class="form-control" id="roleName" [(ngModel)]="newRole.roleName" name="roleName">

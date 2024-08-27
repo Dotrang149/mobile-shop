@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PaginateResult } from '../../../paginate-result';
 
 export interface Product {
   id: string;
@@ -40,14 +41,13 @@ export class ProductService {
     return this.http.delete<void>(`${this.apiUrl}/delete-product/${id}`);
   }
 
-  /* getProductsByPaging(
-     filter: string,
-     sortBy: string,
-     pageIndex: number,
-     pageSize: number
-   ): Observable<PaginatedProductResponse> {
-     return this.http.get<PaginatedProductResponse>(
-       `${this.apiUrl}/get-products-by-paging?filter=${filter}&sortBy=${sortBy}&pageIndex=${pageIndex}&pageSize=${pageSize}`
-     );
-   }*/
+  getProductByPaging(filter: string = '', sortBy: string = '', pageIndex: number = 1, pageSize: number = 20): Observable<PaginateResult<Product>> {
+    let params = new HttpParams()
+      .set('filter', filter)
+      .set('sortBy', sortBy)
+      .set('pageIndex', pageIndex.toString())
+      .set('pageSize', pageSize.toString());
+  
+    return this.http.get<PaginateResult<Product>>(`${this.apiUrl}/get-products-by-paging`, { params });
+  }
 }
