@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { User, UserService } from '../../services/user/user.service';
+import { PaginateResult } from '../../../paginate-result';
 
 @Component({
   selector: 'app-user-management',
@@ -17,13 +18,26 @@ export class UserManagementComponent {
   newUser: { userName: string, email: string, password: string, phoneNumber: number, role: string } = { userName: '', email: '', password: '', phoneNumber: 0, role: '' };
   newRole: { roleName: string, roleDescription: string } = { roleName: '', roleDescription: '' };
 
+
+  paginateResult: PaginateResult<User> = {
+    items: [],
+    totalItems: 0,
+    totalPages: 0,
+    currentPage: 0
+  };
+  filter = '';
+  sortBy = '';
+  pageIndex = 1;
+  pageSize = 20;
+  totalPages!: number;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.loadUsers()
+    
   }
 
-  loadUsers(): void {
+  getAll(): void {
     console.log('Fetching all users...');
     this.userService.getAllUsers().subscribe(
       (data: any) => {
@@ -40,6 +54,18 @@ export class UserManagementComponent {
       }
     );
   }
+
+  loadUsers() : void{
+    this.userService
+      .getUsersByPaging(this.filter, this.sortBy, this.pageIndex, this.pageSize)
+      .subscribe((response) => {
+        this.paginateResult = response;
+        this.users = response.items;
+        console.log(this.users);
+        
+      });
+  }
+
 
   getUserById(userId: string): void {
     this.userService.getUserById(userId).subscribe(

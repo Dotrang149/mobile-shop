@@ -1,6 +1,14 @@
 <div class="container">
     <h1>Quản lý sản phẩm</h1>
   
+    <div class="search-filter">
+      <input type="text" [(ngModel)]="filter" (input)="loadProducts()" placeholder="Search by name" />
+      <select [(ngModel)]="sortBy" (change)="loadProducts()">
+        <option value="name">Name</option>
+        <option value="id">ID</option>
+      </select>
+    </div>
+
     <div class="row">
       <div class="col-md-6">
         <h2>Danh sách sản phẩm</h2>
@@ -29,6 +37,20 @@
           </tbody>
         </table>
       </div>
+
+      <div class="pagination">
+        <button (click)="pageIndex = pageIndex - 1; loadProducts()" [disabled]="pageIndex <= 1">
+          Previous
+        </button>
+        <span>Page {{ pageIndex }}</span>
+        <button
+          (click)="pageIndex = pageIndex + 1; loadProducts()"
+          [disabled]="paginateResult.totalPages <= pageIndex"
+        >
+          Next
+        </button>
+      </div>
+    </div>
   
       <div class="col-md-6" *ngIf="currentProduct">
         <h2>Thông tin sản phẩm</h2>
@@ -96,4 +118,3 @@
         </form>
       </div>
     </div>
-  </div>

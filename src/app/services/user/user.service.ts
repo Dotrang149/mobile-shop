@@ -1,11 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PaginateResult } from '../../../paginate-result';
 
 
 export interface User{
   id : string;
-  name : string;
+  userName : string;
   email : string;
   password : string;
   phonenumber : string;
@@ -58,6 +59,16 @@ export class UserService {
 
   updateUser(user : User): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/users-by-admin`,user);
+  }
+
+  getUsersByPaging(filter: string = '', sortBy: string = '', pageIndex: number = 1, pageSize: number = 10): Observable<PaginateResult<User>> {
+    let params = new HttpParams()
+      .set('filter', filter)
+      .set('sortBy', sortBy)
+      .set('pageIndex', pageIndex.toString())
+      .set('pageSize', pageSize.toString());
+  
+    return this.http.get<PaginateResult<User>>(`${this.apiUrl}/users/paging`, { params });
   }
 }
 
