@@ -15,6 +15,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
+              <th>STT</th>
               <th>ID</th>
               <th>Tên sản phẩm</th>
               <th>Mô tả</th>
@@ -24,7 +25,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of products" (click)="getProductById(product.id)">
+            <tr *ngFor="let product of products,let i = index" (click)="getProductById(product.id)">
+              <td>{{ i + 1 }}</td>
               <td>{{ product.id }}</td>
               <td><a href="javascript:void(0)">{{ product.name }}</a></td>
               <td>{{ product.description }}</td>

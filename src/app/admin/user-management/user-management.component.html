@@ -97,6 +97,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>STT</th>
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
@@ -105,7 +106,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ i + 1 }}</td>
         <td>{{ user.id }}</td>
         <td><a href="javascript:void(0)" (click)="getUserById(user.id)">{{ user.userName }}</a></td>
         <td>{{ user.email }}</td>
