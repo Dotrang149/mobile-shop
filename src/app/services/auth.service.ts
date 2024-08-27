@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from './user/user.service';
 
 export interface RegisterUser {
   userName: string;
@@ -32,16 +33,95 @@ export interface ResetPassword {
   providedIn: 'root'
 })
 export class AuthService {
+  public _response : any;
+  private baseUrl:string = "https://localhost:7189/api/User/";
+  private _localStorage : Storage | undefined;
+  private _user : User | undefined;
+  constructor(private http : HttpClient) { 
+    this._localStorage = document.defaultView?.localStorage;
 
-  private baseUrl:string = "https://localhost:7189/api/User/"
-  constructor(private http : HttpClient) { }
+    if (!this._response) {
+      const loginResult: any = this._localStorage?.getItem('loginResult');
+      if (loginResult) {
+        this._response = JSON.parse(loginResult);
+      }
+    }
+  }
 
-  signUp(userObj:RegisterUser) : Observable<any>{
+  signUp(userObj:RegisterUser) : Promise<any>{
     return this.http.post<any>(`${this.baseUrl}register`, userObj)
+    .toPromise()
+      .then((response) => {
+        this._response = response;
+        this._localStorage?.setItem('loginResult', JSON.stringify(response));
+        this._user = JSON.parse(this._response?.userInformation);
+        this._localStorage?.setItem(
+          'userInformation',
+          JSON.stringify(this._user)
+        );
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
   }
 
   login(loginObj:LoginUser) {
     return this.http.post<any>(`${this.baseUrl}login`, loginObj)
+    .toPromise()
+    .then((response) => {
+      this._response = response;
+        this._localStorage?.setItem('loginResult', JSON.stringify(response));
+        this._user = JSON.parse(this._response?.userInformation);
+        this._localStorage?.setItem(
+          'userInformation',
+          JSON.stringify(this._user)
+        );
+        return response;
+    })
+    .catch((error) =>{
+      return error;
+    })
+  }
+
+  public isLoggedIn(): boolean {
+    return (
+      this._response != null &&
+      this._response.token != null &&
+      this._response.expires != null
+    );
+  }
+
+  public isAuthenticated() {
+    return this.isLoggedIn();
+  }
+
+  public getAccessToken(): string {
+    return this._response ? this._response.token : '';
+  }
+
+  public logout(): boolean {
+    this._response = null;
+    this._localStorage?.removeItem('loginResult');
+    this._localStorage?.removeItem('returnUrl');
+    this._localStorage?.removeItem('userInformation');
+    this._user = undefined;
+    return true;
+  }
+
+  public getCurrentUser(): User | undefined {
+    const userJSON = this._localStorage?.getItem('userInformation');
+    const user: any = userJSON ? JSON.parse(userJSON) : null;
+    return user ? user : null;
+  }
+
+  public isManager(): boolean {
+    const userJSON = this._localStorage?.getItem('userInformation');
+    const user: any = userJSON ? JSON.parse(userJSON) : null;
+    var result =
+      user?.roles.includes('Admin') || user?.roles.includes('Editor');
+
+    return result ? true : false;
   }
 
   resetPassword(data: ResetPassword): Observable<ResetPassword> {

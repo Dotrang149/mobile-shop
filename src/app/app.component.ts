@@ -19,6 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PayComponent } from "./pay/pay.component";
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -38,7 +39,10 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     PayComponent,
     FormsModule,
-    ProductListComponent
+    ProductListComponent,
+    RegisterComponent,
+    LoginComponent
+
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
