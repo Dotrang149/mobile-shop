@@ -20,9 +20,9 @@ export class NavbarComponent{
   faShoppingCart = faShoppingCart;
   constructor(public authService: AuthService, private router: Router) {}
 
-  logout() {
-    this.authService.setLoggedIn(false);
-    this.router.navigate(['/home']);
-  }
+  // logout() {
+  //   this.authService.setLoggedIn(false);
+  //   this.router.navigate(['/home']);
+  // }
 }
 

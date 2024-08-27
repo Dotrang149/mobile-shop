@@ -1,10 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule} from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService, LoginUser } from '../services/auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
+
+
+
+
+export interface LoginResponse{
+  token : string;
+  freshToke : string;
+  expires : Date;
+}
+
 
 @Component({
   selector: 'app-login',
@@ -22,9 +31,22 @@ export class LoginComponent implements OnInit{
   showPassword = false;
 
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {}
+
+  private isAuthenticated: boolean = false;
+
+  public dialogTitle: string = '';
+  public dialogMessage: string = '';
+  public isShowDialog: boolean = false;
+
+  constructor(private fb: FormBuilder, private auth: AuthService,private router : Router) {}
 
   ngOnInit(): void {
+    this.isAuthenticated = this.auth.isAuthenticated();
+
+    if (this.isAuthenticated) {
+      this.router.navigate(['/']);
+    }
+
     this.loginForm = this.fb.group({
       username:['', Validators.required],
       password:['', Validators.required]
@@ -41,19 +63,22 @@ export class LoginComponent implements OnInit{
     if (this.loginForm.valid) {
       const loginData : LoginUser = this.loginForm.value as LoginUser;
       console.log("Form submitted", loginData)
-      this.auth.login(loginData).subscribe({
-        next:(res)=>{
-          if (res && res.message) {
-            alert(res.message);
+      this.auth.login(loginData).then((response: any) => {
+        if (response) {
+          if (response.error) {
+            this.dialogTitle = 'Login Failed';
+            this.dialogMessage = response.error.detail;
+            this.isShowDialog = true;
           } else {
-            alert("Login successful, but no message was returned from the server.");
+            window.location.href = '/';
           }
           this.auth.setLoggedIn(true);  // Lưu trạng thái đăng nhập
           this.router.navigate(['/home']);  // Chuyển hướng sau khi đăng nhập thành công
-        },
-        error:(err)=>{
-          alert(err?.error.message)
         }
+
+        // error:(err)=>{
+        //   alert(err?.error.message)
+        // }
       })
     }else{
       this.validateAllFormFilled(this.loginForm);
@@ -70,5 +95,8 @@ export class LoginComponent implements OnInit{
         this.validateAllFormFilled(control)
       }
     })
+  }
+  public onCloseDialog() {
+    this.isShowDialog = false;
   }
 }

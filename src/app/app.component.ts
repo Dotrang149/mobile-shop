@@ -40,6 +40,7 @@ import { AuthService } from './services/auth.service';
     PayComponent,
     FormsModule,
     ProductListComponent,
+    LoginComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

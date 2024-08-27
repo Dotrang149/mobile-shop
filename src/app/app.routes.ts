@@ -10,6 +10,7 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { CartComponent } from './use/cart/cart.component';
 import { PayComponent } from './pay/pay.component';
 import { ResetPasswordComponent } from  './reset-password/reset-password.component';
+import { ProductManagementComponent } from './admin/product-management/product-management.component';
 
 export const routes: Routes = [
     {path:'', component:HomeComponent},
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {path: 'cart', component:CartComponent},
     {path: 'pay', component:PayComponent},
     {path: 'reset-password', component: ResetPasswordComponent},
+    {path : 'product-management' , component : ProductManagementComponent}
     
   
 ];

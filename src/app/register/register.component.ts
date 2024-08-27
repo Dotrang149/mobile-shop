@@ -19,6 +19,11 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   formSubmitted = false;
 
+  public dialogTitle: string = '';
+  public dialogMessage: string = '';
+  public isShowDialog: boolean = false;
+
+
   constructor(private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -54,29 +59,24 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       const registerData: RegisterUser = this.registerForm.value as RegisterUser;
       console.log('Form submitted:', registerData);
-      this.auth.signUp(registerData).subscribe({
-        next: (res => {
-          alert("Account created successfully");
-          this.registerForm.reset();
-          this.formSubmitted = false;
-        }),
-        error: (err => {
-          console.log('Error', err);
-
-          if (err?.err?.message) {
-            alert(err.error.message);
-          } else {
-            alert('An error occured')
+      this.auth.signUp(registerData).then((response: any) => {
+          if (response) {
+            if (response.error) {
+              // Show error message
+              this.dialogTitle = 'Register Error';
+              this.dialogMessage = response.error;
+              this.isShowDialog = true;
+            } else {
+              window.location.href = '/';
+            }
           }
-
-          if (err?.status == 400) {
-            alert('Username already exists');
-          } else {
-            alert('An error occured');
-          }
-          this.formSubmitted = false;
         })
-      })
+        .catch((error) => {
+          // Show error message
+          this.dialogTitle = 'Register Error';
+          this.dialogMessage = 'Error while saving data';
+          this.isShowDialog = true;
+        })
     } else {
       this.validateAllFormFields(this.registerForm);
       alert("Your form is invalid");
@@ -92,5 +92,9 @@ export class RegisterComponent implements OnInit {
         this.validateAllFormFields(control);
       }
     });
+  }
+
+  public onCloseDialog() {
+    this.isShowDialog = false;
   }
 }
