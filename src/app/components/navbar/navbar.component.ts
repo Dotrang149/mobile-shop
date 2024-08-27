@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faL, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../../services/auth.service';
 
@@ -18,11 +18,31 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent{
   faShoppingCart = faShoppingCart;
+  isAdmin: boolean = false;
+  isCustomer: boolean = false;
   constructor(public authService: AuthService, private router: Router) {}
 
-  // logout() {
-  //   this.authService.setLoggedIn(false);
-  //   this.router.navigate(['/home']);
-  // }
+  ngOnInit(){
+    if (this.authService.isLoggedIn()) {
+      this.authService.getRole().subscribe({
+        next: (role) => {
+          if (role === 'User is in Admin role') {
+            this.isAdmin = true;
+          } else if (role === 'User is in Customer role') {
+            this.isCustomer = true;
+          }
+        },
+        error: (err) => {
+          console.error('Error checking role', err);
+        }
+      });
+    }
+  }
+
+  setFalse(){
+    this.isAdmin = false;
+    this.isCustomer = false;
+  }
+
 }
 

@@ -72,7 +72,8 @@ export class LoginComponent implements OnInit{
           } else {
             window.location.href = '/';
           }
-          this.auth.setLoggedIn(true);  // Lưu trạng thái đăng nhập
+          
+            // Lưu trạng thái đăng nhập
           this.router.navigate(['/home']);  // Chuyển hướng sau khi đăng nhập thành công
         }
 

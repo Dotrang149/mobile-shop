@@ -136,14 +136,8 @@ export class AuthService {
     return this.http.get<any>(`${this.baseUrl}verify-user`, {params});
   }
 
-  private loggedIn = false;
-
-  setLoggedIn(value: boolean) {
-    this.loggedIn = value;
-  }
-  
-  getRole() {
-    return this.userRole.asObservable();
+  getRole() : Observable<any>{
+    return this.http.get(`${this.baseUrl}check-role`, { responseType: 'text' });
   }
 
 }
