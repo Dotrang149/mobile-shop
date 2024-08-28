@@ -1,0 +1,42 @@
+.review-container {
+    margin-top: 20px;
+  }
+  
+  .review-form {
+    margin-bottom: 20px;
+  }
+  
+  .review-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .review-form button {
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .reviews-list {
+    margin-top: 20px;
+  }
+  
+  .review-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .review-actions {
+    margin-top: 10px;
+  }
+  
+  .no-reviews {
+    margin-top: 20px;
+    font-style: italic;
+  }
+  

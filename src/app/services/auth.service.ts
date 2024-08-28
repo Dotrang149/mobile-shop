@@ -37,7 +37,7 @@ export class AuthService {
   private baseUrl:string = "https://localhost:7189/api/User/"
   public _response : any;
   private _localStorage : Storage | undefined;
-  private _user : User | undefined;
+  public _user : User | undefined;
   constructor(private http : HttpClient) { 
     this._localStorage = document.defaultView?.localStorage;
 
@@ -139,5 +139,6 @@ export class AuthService {
   getRole() : Observable<any>{
     return this.http.get(`${this.baseUrl}check-role`, { responseType: 'text' });
   }
+  
 
 }
