@@ -140,8 +140,6 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}check-role`, { responseType: 'text' });
   }
 
-  getCurrentUser() : Observable<User>{
-    return this.http.get<User>(`${this.baseUrl}get-current-user`);
-  }
+
 
 }
