@@ -11,7 +11,7 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+  box-sizing: border-box;
 }
 
 .review-form button {
@@ -25,14 +25,28 @@
 }
 
 .review-form button[disabled] {
-  background-color: #c0c0c0; /* Disabled button color */
+  background-color: #c0c0c0;
   cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: #dc3545; /* Red color for cancel button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 10px; /* Space between submit and cancel buttons */
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #c82333; /* Darker red on hover */
 }
 
 .error-message {
   color: red;
   font-size: 12px;
-  margin-top: 5px; /* Space between error message and textarea */
+  margin-top: 5px;
 }
 
 .reviews-list {
@@ -48,8 +62,9 @@
   margin-top: 10px;
 }
 
-.review-actions button {
-  background-color: #dc3545; /* Danger button color */
+.review-actions .edit-button,
+.toggle-button {
+  background-color: #007bff; /* Blue for edit and toggle buttons */
   color: white;
   border: none;
   border-radius: 5px;
@@ -58,26 +73,26 @@
   margin-right: 5px; /* Space between buttons */
 }
 
-.review-actions button:hover {
-  background-color: #c82333; /* Darker shade on hover */
+.review-actions .edit-button:hover,
+.toggle-button:hover {
+  background-color: #0056b3; /* Darker blue shade on hover */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red for delete button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red shade on hover */
 }
 
 .no-reviews {
   margin-top: 20px;
   font-style: italic;
-  color: #6c757d; /* Secondary text color */
-}
-
-.review-container button {
-  margin-top: 20px; /* Space above the toggle button */
-  background-color: #28a745; /* Button color for showing/hiding reviews */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.review-container button:hover {
-  background-color: #218838; /* Darker shade on hover */
+  color: #6c757d;
 }
