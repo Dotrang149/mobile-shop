@@ -13,6 +13,7 @@ import { ResetPasswordComponent } from  './reset-password/reset-password.compone
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
 import { BrandManagementComponent } from './admin/brand-management/brand-management.component';
 import { PromotionManagementComponent } from './admin/promotion-management/promotion-management.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
     {path:'', component:HomeComponent},
@@ -29,7 +30,7 @@ export const routes: Routes = [
     {path: 'product-management' , component : ProductManagementComponent},
     {path: 'user-management', component: UserManagementComponent},
     {path: 'brand-management', component: BrandManagementComponent},
-    {path: 'promotion-management', component: PromotionManagementComponent}
-    
+    {path: 'promotion-management', component: PromotionManagementComponent},
+    {path: 'app-profile', component: ProfileComponent}
   
 ];

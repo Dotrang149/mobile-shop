@@ -73,6 +73,7 @@ export class AuthService {
     .then((response) => {
       this._response = response;
         this._localStorage?.setItem('loginResult', JSON.stringify(response));
+        console.log('Login Result Saved:', JSON.stringify(response)); // Thêm dòng này để kiểm tra
         this._user = JSON.parse(this._response?.userInformation);
         this._localStorage?.setItem(
           'userInformation',
@@ -84,6 +85,27 @@ export class AuthService {
       return error;
     })
   }
+
+  // login(loginObj: LoginUser) {
+  //   return this.http.post<any>(`${this.baseUrl}login`, loginObj)
+  //     .toPromise()
+  //     .then((response) => {
+  //       // Giả sử 'userId' là thuộc tính tồn tại trong response
+  //       const loginResult = {
+  //         id: response.userId, // thêm dòng này
+  //         token: response.token,
+  //         refershToken: response.refershToken,
+  //         expires: response.expires,
+  //       };
+  //       this._localStorage?.setItem('loginResult', JSON.stringify(loginResult));
+  //       console.log('Login Result Saved:', JSON.stringify(loginResult)); 
+  //       return response;
+  //     })
+  //     .catch((error) => {
+  //       return error;
+  //     });
+  // }
+  
 
   public isLoggedIn(): boolean {
     return (
@@ -110,11 +132,11 @@ export class AuthService {
     return true;
   }
 
-  // public getCurrentUser(): User | undefined {
-  //   const userJSON = this._localStorage?.getItem('userInformation');
-  //   const user: any = userJSON ? JSON.parse(userJSON) : null;
-  //   return user ? user : null;
-  // }
+  public getCurrentUser(): User | undefined {
+    const userJSON = this._localStorage?.getItem('userInformation');
+    const user: any = userJSON ? JSON.parse(userJSON) : null;
+    return user ? user : null;
+  }
 
   public isManager(): boolean {
     const userJSON = this._localStorage?.getItem('userInformation');

@@ -47,7 +47,7 @@
         <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
       </a>
       <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item" routerLink="/my-account">Tài khoản của tôi</a></li>
+        <li><a class="dropdown-item" routerLink="/app-profile">Tài khoản của tôi</a></li>
         <li><a class="dropdown-item" routerLink="/cart">Giỏ hàng</a></li>
         <li><a class="dropdown-item" (click)="authService.logout(); setFalse()">Đăng xuất</a></li>
       </ul>
@@ -58,7 +58,7 @@
         <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
       </a>
       <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen" aria-labelledby="userDropdown">
-        <li><a class="dropdown-item" routerLink="/my-account">Tài khoản của tôi</a></li>
+        <li><a class="dropdown-item" routerLink="/app-profile">Tài khoản của tôi</a></li>
         <li><a class="dropdown-item" routerLink="/user-management">Quản lý người dùng</a></li>
         <li><a class="dropdown-item" routerLink="/product-management">Quản lý sản phẩm</a></li>
         <li><a class="dropdown-item" routerLink="/brand-management">Quản lý thương hiệu</a></li>

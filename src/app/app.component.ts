@@ -19,7 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PayComponent } from "./pay/pay.component";
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-
+import { ProfileComponent } from "./profile/profile.component";
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -40,7 +40,8 @@ import { AuthService } from './services/auth.service';
     PayComponent,
     FormsModule,
     ProductListComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
