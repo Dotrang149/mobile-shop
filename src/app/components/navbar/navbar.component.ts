@@ -34,19 +34,25 @@ export class NavbarComponent{
             this.authService._localStorage?.setItem('isCustomer','false');
             console.log(this.authService._localStorage?.getItem('isAdmin'));
             console.log(this.authService._localStorage?.getItem('isCustomer'));
+            console.log(this.authService._localStorage?.getItem('userInformation'));
+            
             
           } else if (role === 'User is in Customer role') {
             this.isCustomer = true;
             this.isAdmin = false;
             this.authService._localStorage?.setItem('isAdmin','false');
             this.authService._localStorage?.setItem('isCustomer','true');
-            console.log(this.isAdmin +'' +this.isCustomer);
+            console.log(this.authService._localStorage?.getItem('isAdmin'));
+            console.log(this.authService._localStorage?.getItem('isCustomer'));
+            console.log(this.authService._localStorage?.getItem('userInformation'));
           } else {
             this.isCustomer = false;
             this.isAdmin = false;
             this.authService._localStorage?.setItem('isAdmin','false');
             this.authService._localStorage?.setItem('isCustomer','false');
-            console.log(this.isAdmin +'' +this.isCustomer);
+            console.log(this.authService._localStorage?.getItem('isAdmin'));
+            console.log(this.authService._localStorage?.getItem('isCustomer'));
+            console.log(this.authService._localStorage?.getItem('userInformation'));
           }
         },
         error: (err) => {

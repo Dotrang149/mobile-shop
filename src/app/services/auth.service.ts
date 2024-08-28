@@ -110,11 +110,11 @@ export class AuthService {
     return true;
   }
 
-  public getCurrentUser(): User | undefined {
-    const userJSON = this._localStorage?.getItem('userInformation');
-    const user: any = userJSON ? JSON.parse(userJSON) : null;
-    return user ? user : null;
-  }
+  // public getCurrentUser(): User | undefined {
+  //   const userJSON = this._localStorage?.getItem('userInformation');
+  //   const user: any = userJSON ? JSON.parse(userJSON) : null;
+  //   return user ? user : null;
+  // }
 
   public isManager(): boolean {
     const userJSON = this._localStorage?.getItem('userInformation');
@@ -138,6 +138,10 @@ export class AuthService {
 
   getRole() : Observable<any>{
     return this.http.get(`${this.baseUrl}check-role`, { responseType: 'text' });
+  }
+
+  getCurrentUser() : Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}get-current-user`);
   }
 
 }
