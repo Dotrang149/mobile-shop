@@ -43,6 +43,7 @@ export class NavbarComponent{
   setFalse(){
     this.isAdmin = false;
     this.isCustomer = false;
+    this.router.navigate(['']);
   }
 
   isDropdownOpen: boolean = false;
