@@ -36,7 +36,7 @@ export class AuthService {
   private userRole: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private baseUrl:string = "https://localhost:7189/api/User/"
   public _response : any;
-  private _localStorage : Storage | undefined;
+  public _localStorage : Storage | undefined;
   private _user : User | undefined;
   constructor(private http : HttpClient) { 
     this._localStorage = document.defaultView?.localStorage;

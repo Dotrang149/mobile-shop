@@ -29,8 +29,24 @@ export class NavbarComponent{
         next: (role) => {
           if (role === 'User is in Admin role') {
             this.isAdmin = true;
+            this.isCustomer = false;
+            this.authService._localStorage?.setItem('isAdmin','true');
+            this.authService._localStorage?.setItem('isCustomer','false');
+            console.log(this.authService._localStorage?.getItem('isAdmin'));
+            console.log(this.authService._localStorage?.getItem('isCustomer'));
+            
           } else if (role === 'User is in Customer role') {
             this.isCustomer = true;
+            this.isAdmin = false;
+            this.authService._localStorage?.setItem('isAdmin','false');
+            this.authService._localStorage?.setItem('isCustomer','true');
+            console.log(this.isAdmin +'' +this.isCustomer);
+          } else {
+            this.isCustomer = false;
+            this.isAdmin = false;
+            this.authService._localStorage?.setItem('isAdmin','false');
+            this.authService._localStorage?.setItem('isCustomer','false');
+            console.log(this.isAdmin +'' +this.isCustomer);
           }
         },
         error: (err) => {
@@ -43,6 +59,8 @@ export class NavbarComponent{
   setFalse(){
     this.isAdmin = false;
     this.isCustomer = false;
+    this.authService._localStorage?.setItem('isAdmin','false');
+    this.authService._localStorage?.setItem('isCustomer','false');
     this.router.navigate(['']);
   }
 

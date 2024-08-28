@@ -42,7 +42,7 @@
         Customer Dashboard
     </button> -->
 
-    <li class="nav-item dropdown"  *ngIf="isCustomer">
+    <li class="nav-item dropdown"  *ngIf="authService._localStorage?.getItem('isCustomer') === 'true'">
       <a  class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" (click)="toggleDropdown()" aria-expanded="false">
         <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
       </a>
@@ -53,7 +53,7 @@
       </ul>
     </li>
 
-    <li class="nav-item dropdown" *ngIf="isAdmin">
+    <li class="nav-item dropdown" *ngIf="authService._localStorage?.getItem('isAdmin') === 'true'">
       <a  class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" (click)="toggleDropdown()" aria-expanded="false">
         <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
       </a>
