@@ -67,22 +67,20 @@ export class AuthService {
       });
   }
 
-  login(loginObj:LoginUser) {
+  login(loginObj: LoginUser) {
     return this.http.post<any>(`${this.baseUrl}login`, loginObj)
-    .toPromise()
-    .then((response) => {
-      this._response = response;
+      .toPromise()
+      .then((response) => {
+        this._response = response;
         this._localStorage?.setItem('loginResult', JSON.stringify(response));
         this._user = JSON.parse(this._response?.userInformation);
-        this._localStorage?.setItem(
-          'userInformation',
-          JSON.stringify(this._user)
-        );
+        this._localStorage?.setItem('userInformation', JSON.stringify(this._user));
+        console.log('Login result stored:', response); // Debugging line
         return response;
-    })
-    .catch((error) =>{
-      return error;
-    })
+      })
+      .catch((error) => {
+        return error;
+      });
   }
 
   public isLoggedIn(): boolean {
@@ -139,6 +137,19 @@ export class AuthService {
   getRole() : Observable<any>{
     return this.http.get(`${this.baseUrl}check-role`, { responseType: 'text' });
   }
-  
 
+  public getCurrentUserId(): string | undefined {
+    const loginResultJSON = this._localStorage?.getItem('loginResult');
+    const loginResult: any = loginResultJSON ? JSON.parse(loginResultJSON) : undefined;
+    return loginResult ? loginResult.id : undefined;
+  }
+
+  public getCurrentUserName(): string | undefined {
+    const userJSON = this._localStorage?.getItem('loginResult');
+    console.log('Stored userJSON:', userJSON); 
+    const user: any = userJSON ? JSON.parse(userJSON) : undefined;
+    console.log('Parsed user object:', user); 
+    return user?.userName;
+  }
+  
 }

@@ -1,42 +1,83 @@
 .review-container {
-    margin-top: 20px;
-  }
-  
-  .review-form {
-    margin-bottom: 20px;
-  }
-  
-  .review-form textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .review-form button {
-    margin-top: 10px;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 12px;
-  }
-  
-  .reviews-list {
-    margin-top: 20px;
-  }
-  
-  .review-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .review-actions {
-    margin-top: 10px;
-  }
-  
-  .no-reviews {
-    margin-top: 20px;
-    font-style: italic;
-  }
-  
+  margin-top: 20px;
+}
+
+.review-form {
+  margin-bottom: 20px;
+}
+
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+.review-form button {
+  margin-top: 10px;
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.review-form button[disabled] {
+  background-color: #c0c0c0; /* Disabled button color */
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px; /* Space between error message and textarea */
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review-actions {
+  margin-top: 10px;
+}
+
+.review-actions button {
+  background-color: #dc3545; /* Danger button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px; /* Space between buttons */
+}
+
+.review-actions button:hover {
+  background-color: #c82333; /* Darker shade on hover */
+}
+
+.no-reviews {
+  margin-top: 20px;
+  font-style: italic;
+  color: #6c757d; /* Secondary text color */
+}
+
+.review-container button {
+  margin-top: 20px; /* Space above the toggle button */
+  background-color: #28a745; /* Button color for showing/hiding reviews */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.review-container button:hover {
+  background-color: #218838; /* Darker shade on hover */
+}

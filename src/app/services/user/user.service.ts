@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PaginateResult } from '../../../paginate-result';
+import { catchError, map } from 'rxjs';
 
 
 export interface User{
@@ -69,6 +70,16 @@ export class UserService {
       .set('pageSize', pageSize.toString());
   
     return this.http.get<PaginateResult<User>>(`${this.apiUrl}/users/paging`, { params });
+  }
+
+  getUserNameById(userId: string): Observable<string> {
+    return this.getUserById(userId).pipe(
+      map(user => user.userName || 'Unknown User'),
+      catchError(err => {
+        console.error('Error fetching user:', err);
+        return ('Unknown User');
+      })
+    );
   }
 }
 
