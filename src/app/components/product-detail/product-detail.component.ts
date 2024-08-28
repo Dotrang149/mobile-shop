@@ -4,23 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService, Product } from '../../services/product.service';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
+import { ReviewComponent } from '../../review/review.component';
 
-interface Review {
-  reviewerName: string;
-  rating: number;
-  comment: string;
-}
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, NavbarComponent, FooterComponent, ReviewComponent],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
-  reviews: Review[] = [];
+  productId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,10 +25,12 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      const productId = params.get('id');
-      console.log('Product ID from URL:', productId);
-      if (productId) {
-        this.productService.getProductById(productId).subscribe(
+      const id = params.get('id');
+      if (id) {
+        this.productId = id;
+        console.log('Product ID from URL:', this.productId);
+        
+        this.productService.getProductById(this.productId).subscribe(
           (product: Product) => {
             console.log('Fetched product:', product); 
             this.product = product;
@@ -43,12 +41,5 @@ export class ProductDetailComponent implements OnInit {
         );
       }
     });
-
-     // Giả lập dữ liệu đánh giá
-   this.reviews = [
-    { reviewerName: 'Nguyễn Văn A', rating: 5, comment: 'Sản phẩm rất tốt!' },
-    { reviewerName: 'Trần Thị B', rating: 4, comment: 'Chất lượng ổn, giá hơi cao.' },
-    { reviewerName: 'Phạm Văn C', rating: 3, comment: 'Sản phẩm dùng ổn, giao hàng chậm.' }
-  ];
   }
 }

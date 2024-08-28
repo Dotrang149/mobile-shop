@@ -5,6 +5,7 @@ import { User, UserService } from '../../services/user/user.service';
 import { PaginateResult } from '../../../paginate-result';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +16,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 })
 export class UserManagementComponent {
   users: User[] = [];
-  currentUser!: User;
+  currentUser: User  = { id: '',userName: '', email: '', password: '', phonenumber: '', role: '' }
   newUser: { userName: string, email: string, password: string, phoneNumber: number, role: string } = { userName: '', email: '', password: '', phoneNumber: 0, role: '' };
   newRole: { roleName: string, roleDescription: string } = { roleName: '', roleDescription: '' };
 
@@ -175,5 +176,30 @@ export class UserManagementComponent {
         console.error('Lỗi khi cập nhật người dùng:', error);
       }
     );
+  }
+
+  openCreateUserModal() {
+    const createUserModal = document.getElementById('createUserModal');
+    if (createUserModal) {
+      const modal = new bootstrap.Modal(createUserModal);
+      modal.show();
+    }
+  }
+
+  openCreateRoleModal() {
+    const createRoleModal = document.getElementById('createRoleModal');
+    if (createRoleModal) {
+      const modal = new bootstrap.Modal(createRoleModal);
+      modal.show();
+    }
+  }
+
+  openUserDetailModal(user: User) {
+    this.currentUser = user;
+    const userDetailModal = document.getElementById('userDetailModal'); // Sửa ID thành userDetailModal
+    if (userDetailModal) {
+      const modal = new bootstrap.Modal(userDetailModal);
+      modal.show();
+    }
   }
 }

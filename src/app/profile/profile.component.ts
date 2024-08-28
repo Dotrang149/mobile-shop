@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user/user.service';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "../components/navbar/navbar.component";
+import { FooterComponent } from "../components/footer/footer.component";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -36,30 +38,6 @@ export class ProfileComponent implements OnInit {
     const loginResult = loginResultJSON ? JSON.parse(loginResultJSON) : undefined;
     return loginResult ? loginResult.id : undefined;
   }
-
-  // getCurrentUserId(): string | undefined {
-  //   // Lấy login result từ localStorage
-  //   const loginResultJSON = localStorage.getItem('loginResult');
-  //   const loginResult = loginResultJSON ? JSON.parse(loginResultJSON) : undefined;
-  
-  //   if (loginResult && loginResult.token) {
-  //     try {
-  //       // Giải mã phần payload của JWT
-  //       const token = loginResult.token;
-  //       const payload = token.split('.')[1];
-  //       const decodedPayload = JSON.parse(atob(payload));
-  
-  //       console.log('Decoded JWT Payload:', decodedPayload);
-  
-  //       // Trả về userId từ payload (có thể là thuộc tính 'sub' hoặc 'nameidentifier')
-  //       return decodedPayload.nameidentifier || decodedPayload.sub;
-  //     } catch (error) {
-  //       console.error('Error decoding JWT:', error);
-  //       return undefined;
-  //     }
-  //   }
-  //   return undefined;
-  // }
   
   
 }

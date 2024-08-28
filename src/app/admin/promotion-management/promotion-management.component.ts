@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Promotion, PromotionService } from '../../services/promotion/promotion.service';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-promotion-management',
@@ -14,7 +15,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 })
 export class PromotionManagementComponent {
   promotions: Promotion[] = [];
-  currentPromotion!: Promotion;
+  currentPromotion: Promotion={id: '', name: '', description: '', dateStart: new Date(), dateEnd: new Date()};
   newPromotion: { name: string, description: string, dateStart: Date, dateEnd: Date } = {name:'',description:'',dateStart:new Date,dateEnd:new Date};
 
   constructor(private promotionService : PromotionService){}
@@ -96,6 +97,23 @@ export class PromotionManagementComponent {
           }
         }
       );
+    }
+
+    openPromotionDetailModal(promotion: Promotion) {
+      this.currentPromotion = promotion;
+      const promotionDetailModal = document.getElementById('promotionDetailModal');
+      if (promotionDetailModal) {
+        const modal = new bootstrap.Modal(promotionDetailModal);
+        modal.show();
+      }
+    }
+  
+    openCreatePromotionModal() {
+      const createPromotionModal = document.getElementById('createPromotionModal');
+      if (createPromotionModal) {
+        const modal = new bootstrap.Modal(createPromotionModal);
+        modal.show();
+      }
     }
   }
 

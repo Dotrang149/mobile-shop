@@ -44,6 +44,7 @@ app-footer {
 .custom-heading {
     font-size: 3rem; /* Tăng cỡ chữ cho tiêu đề */
     font-weight: bold; /* Làm đậm tiêu đề */
+    padding-left: 100px;
 }
 
 .custom-image {
@@ -52,3 +53,12 @@ app-footer {
     width: 70%; /* Tăng kích thước ảnh lên 80% so với container */
 }
 
+.custom-background {
+    /* Các thuộc tính khác của custom-background */
+    background-image: url("https://png.pngtree.com/background/20210715/original/pngtree-background-white-picture-image_1281315.jpg"); 
+    background-size: cover; /* Điều chỉnh kích thước hình ảnh */
+    background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+    margin-top: auto;
+    margin-bottom: auto;
+    
+  }

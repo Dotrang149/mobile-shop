@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Brand, BrandService } from '../../services/brand/brand.service';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { FooterComponent } from "../../components/footer/footer.component";
+import * as bootstrap from 'bootstrap'; // Import Bootstrap
 
 @Component({
   selector: 'app-brand-management',
@@ -14,7 +15,8 @@ import { FooterComponent } from "../../components/footer/footer.component";
 })
 export class BrandManagementComponent {
   brands: Brand[] = [];
-  currentBrand!: Brand;
+  // currentBrand!: Brand;
+  currentBrand: Brand = { id: '', name: '', description: '' };
   newBrand: { name: string, description: string } = { name: '', description: '' };
 
   constructor(private brandService: BrandService) { }
@@ -98,5 +100,22 @@ export class BrandManagementComponent {
         }
       }
     );
+  }
+
+  openBrandModal(brand: any) {
+    this.currentBrand = brand;
+    const brandModal = document.getElementById('brandModal');
+    if (brandModal) {
+      const modal = new bootstrap.Modal(brandModal);
+      modal.show();
+    }
+  }
+
+  toggleCreateBrandForm() {
+    const createBrandModal = document.getElementById('createBrandModal');
+    if (createBrandModal) {
+      const modal = new bootstrap.Modal(createBrandModal);
+      modal.show();
+    }
   }
 }

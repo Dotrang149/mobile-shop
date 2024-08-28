@@ -5,6 +5,7 @@ import { Product, ProductService } from '../../services/product/product.service'
 import { PaginateResult } from '../../../paginate-result';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+import * as bootstrap from 'bootstrap';
 
 
 
@@ -17,7 +18,8 @@ import { FooterComponent } from '../../components/footer/footer.component';
 })
 export class ProductManagementComponent {
   products: Product[] = [];
-  currentProduct!: Product;
+  // currentProduct!: Product;
+  currentProduct: Product={id:'', image: '', name: '', description: '', price: 0,brandName: '',promotionName: ''};
   newProduct: { name: string, description: string, price: number, image: string, brandName: string, promotionName: string } = { name: '', description: '', price: 0, image: '', brandName: '', promotionName: '' }
 
 
@@ -140,5 +142,22 @@ export class ProductManagementComponent {
         console.error('Error fetching product:', error);
       }
     );
+  }
+
+  openProductDetailModal(product: Product) {
+    this.currentProduct = product;
+    const productDetailModal = document.getElementById('productDetailModal');
+    if (productDetailModal) {
+      const modal = new bootstrap.Modal(productDetailModal);
+      modal.show();
+    }
+  }
+
+  openCreateProductModal() {
+    const createProductModal = document.getElementById('createProductModal');
+    if (createProductModal) {
+      const modal = new bootstrap.Modal(createProductModal);
+      modal.show();
+    }
   }
 }

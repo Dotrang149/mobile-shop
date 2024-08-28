@@ -7,7 +7,7 @@
 
 
 
-h1, h2 {
+h1 {
     text-align: center; /* Căn giữa tiêu đề */
     color: #343a40; /* Màu chữ tối */
     margin-bottom: 20px;
@@ -46,11 +46,6 @@ h1, h2 {
     cursor: pointer; /* Con trỏ chỉ tay khi hover */
 }
 
-.btn-primary:hover {
-    background-color: #0056b3; /* Màu nền khi hover */
-    border-color: #004085; /* Màu viền khi hover */
-}
-
 .btn-danger {
     background-color: #dc3545; /* Màu nền nút xóa */
     border-color: #dc3545; /* Màu viền nút xóa */
@@ -58,6 +53,12 @@ h1, h2 {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin: 20px
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    border-color: #004085; /* Màu viền khi hover */
 }
 
 .btn-danger:hover {
@@ -88,4 +89,15 @@ h1, h2 {
 
 .table img {
     border-radius: 5px;
+}
+
+.btn-them{
+    background-color: #49cc90; /* Màu nền nút chính */
+    border-color: #49cc90; /* Màu viền nút chính */
+    color: white; /* Màu chữ */
+    padding: 10px 20px; /* Khoảng cách bên trong nút */
+    border-radius: 5px; /* Bo tròn góc nút */
+    cursor: pointer; /* Con trỏ chỉ tay khi hover */
+    float: right;
+    margin: 20px;
 }
