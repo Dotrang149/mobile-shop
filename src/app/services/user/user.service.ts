@@ -14,8 +14,6 @@ export interface User{
   role : string;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -81,6 +79,7 @@ export class UserService {
       })
     );
   }
+
 }
 
 

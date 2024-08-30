@@ -5,7 +5,7 @@ import { PaginatedResult } from '../page/PaginatedResult';
 
 // Define an interface for the product
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   description : string;
   image: string;

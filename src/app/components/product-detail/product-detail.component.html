@@ -11,7 +11,7 @@
           <h1>{{ product.name }}</h1>
           <p>{{ product.description }}</p>
           <p class="text-primary">{{ product.price | currency }}</p>
-          <button class="btn btn-success">Thêm vào giỏ hàng</button>
+          <button class="btn btn-success" (click)="addToCart()">Thêm vào giỏ hàng</button>
         </div>
       </div>
     </div>

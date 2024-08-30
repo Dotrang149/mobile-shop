@@ -4,20 +4,20 @@ import { Observable } from 'rxjs';
 import { PaginateResult } from '../../../paginate-result';
 
 export interface Product {
-  id: string;
+  id: string; 
   name: string;
   description: string;
   price: number;
   image: string;
   brandName: string;
   promotionName: string;
-  
 }
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'https://localhost:7189/api/Product'; // Assuming your API endpoint is at 'api/Product'
+  private apiUrl = 'https://localhost:7189/api/Product'; 
 
   constructor(private http: HttpClient) { }
 
