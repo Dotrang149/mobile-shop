@@ -7,6 +7,7 @@ import { UserService } from '../services/user/user.service';
 import { AuthService } from '../services/auth.service';
 import { Observable, of, from } from 'rxjs';
 import { switchMap, catchError } from 'rxjs/operators';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-review',
@@ -22,23 +23,25 @@ export class ReviewComponent implements OnInit {
   userId: string | undefined;
   editingReview: Review | null = null;
   showReviews: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private reviewService: ReviewService,
     public userService: UserService,
-    public authService: AuthService
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.userId = this.authService.getCurrentUserId();
     console.log('userId', this.userId);
     this.initializeForm();
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   initializeForm(): void {
     this.reviewForm = this.fb.group({
-      comment: ['', [Validators.required, Validators.minLength(3)]]
+      comment: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
@@ -80,7 +83,7 @@ export class ReviewComponent implements OnInit {
       comment: this.reviewForm.value.comment,
       userId: this.userId,
       productId: this.productId,
-      userName: this.authService.getCurrentUserName() || 'Unknown User' // Add userName when adding a review
+      userName: this.authService.getCurrentUserName() || 'Anonymus User' // Add userName when adding a review
     };
 
     if (this.editingReview) {
